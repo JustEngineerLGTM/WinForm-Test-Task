@@ -248,7 +248,7 @@ partial class Form1
         ClientSize = new System.Drawing.Size(800, 450);
         Controls.Add(tab);
         MinimumSize = new System.Drawing.Size(500, 500);
-        Text = "Form1";
+        Text = "Сотрудники и статистика";
         tab.ResumeLayout(false);
         tabPage1.ResumeLayout(false);
         tabPage1.PerformLayout();
