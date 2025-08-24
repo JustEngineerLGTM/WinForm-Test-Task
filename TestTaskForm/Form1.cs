@@ -14,19 +14,26 @@ namespace TestTaskForm
     public partial class Form1 : Form
     {
         private readonly IEmployeeRepository _employeeRepository;
+        private readonly IReportRepository _reportRepository;
         private List<Person> _allEmployees = new();
 
         public Form1(IServiceProvider provider)
         {
             _employeeRepository = provider.GetRequiredService<IEmployeeRepository>();
+            _reportRepository = provider.GetRequiredService<IReportRepository>();
             InitializeComponent();
             Load += Form1_Load;
+
+            dateTimePickerFrom.ValueChanged += ReportFiltersChanged;
+            dateTimePickerTo.ValueChanged += ReportFiltersChanged;
+            comboBoxStatusReport.SelectedIndexChanged += ReportFiltersChanged;
         }
 
         private async void Form1_Load(object sender, EventArgs e)
         {
             await LoadDataAsync();
             InitFilters();
+            InitReportStatusCombo();
             ApplyFilters();
         }
 
@@ -35,6 +42,33 @@ namespace TestTaskForm
             _allEmployees.Clear();
             await foreach (var p in _employeeRepository.GetAllAsync())
                 _allEmployees.Add(p);
+        }
+
+        private void InitReportStatusCombo()
+        {
+            var statusList = _allEmployees
+                .Where(p => true)
+                .GroupBy(p => p.Status.Id)
+                .Select(g => g.First().Status)
+                .ToList();
+
+            comboBoxStatusReport.DataSource = statusList;
+            comboBoxStatusReport.DisplayMember = "Name";
+            comboBoxStatusReport.ValueMember = "Id";
+        }
+
+        private async void ReportFiltersChanged(object? sender, EventArgs e)
+        {
+            var from = dateTimePickerFrom.Value.Date;
+            var to = dateTimePickerTo.Value.Date;
+
+            var statusId = 0;
+            if (comboBoxStatusReport.SelectedItem is Status status)
+                statusId = status.Id;
+
+            var count = await _reportRepository.GetCountAsync(statusId, from, to);
+
+            labelResult.Text = $"Сотрудников: {count}";
         }
 
         private void InitFilters()
@@ -51,7 +85,6 @@ namespace TestTaskForm
             comboBoxStatus.DataSource = statusList;
             comboBoxStatus.DisplayMember = "Name";
             comboBoxStatus.ValueMember = "Id";
-            comboBoxStatus.SelectedIndex = 0;
 
             var depList = _allEmployees
                 .Where(p => true)
@@ -65,7 +98,6 @@ namespace TestTaskForm
             comboBoxDep.DataSource = depList;
             comboBoxDep.DisplayMember = "Name";
             comboBoxDep.ValueMember = "Id";
-            comboBoxDep.SelectedIndex = 0;
 
             var postList = _allEmployees
                 .Where(p => true)
@@ -79,7 +111,6 @@ namespace TestTaskForm
             comboBoxPost.DataSource = postList;
             comboBoxPost.DisplayMember = "Name";
             comboBoxPost.ValueMember = "Id";
-            comboBoxPost.SelectedIndex = 0;
 
             comboBoxStatus.SelectedIndexChanged += (s, e) => ApplyFilters();
             comboBoxDep.SelectedIndexChanged += (s, e) => ApplyFilters();
@@ -132,7 +163,7 @@ namespace TestTaskForm
             }
 
             dataGridView_employees.DataSource = dt;
-            
+
             foreach (DataGridViewColumn column in dataGridView_employees.Columns)
                 column.SortMode = DataGridViewColumnSortMode.Automatic;
         }

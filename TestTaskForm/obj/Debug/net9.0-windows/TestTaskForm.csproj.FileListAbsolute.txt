@@ -158,3 +158,5 @@ C:\Users\JustEngineer\RiderProjects\TestTaskForm\TestTaskForm\bin\Debug\net9.0-w
 C:\Users\JustEngineer\RiderProjects\TestTaskForm\TestTaskForm\bin\Debug\net9.0-windows\runtimes\win\lib\net9.0\System.Diagnostics.EventLog.dll
 C:\Users\JustEngineer\RiderProjects\TestTaskForm\TestTaskForm\bin\Debug\net9.0-windows\appsettings.json
 C:\Users\JustEngineer\RiderProjects\TestTaskForm\TestTaskForm\obj\Debug\net9.0-windows\TestTaskForm.sourcelink.json
+C:\Users\JustEngineer\RiderProjects\TestTaskForm\TestTaskForm\obj\Debug\net9.0-windows\TestTaskForm.Form1.resources
+C:\Users\JustEngineer\RiderProjects\TestTaskForm\TestTaskForm\obj\Debug\net9.0-windows\TestTaskForm.csproj.GenerateResource.cache
