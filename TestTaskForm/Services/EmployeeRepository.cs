@@ -14,7 +14,7 @@ public class EmployeeRepository(IDbContextFactory<AppDbContext> contextFactory) 
         await using var dbContextAsync = await contextFactory.CreateDbContextAsync();
         
         var persons = await dbContextAsync.Persons
-            .FromSqlRaw("EXEC dbo.sp_GetAllPersons")
+            .FromSqlRaw("EXEC GetAllPersons")
             .AsNoTracking()
             .ToListAsync();
         

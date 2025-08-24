@@ -25,7 +25,7 @@ static class Program
 
         var contextFactory = host.Services.GetRequiredService<IDbContextFactory<AppDbContext>>();
         await using var dbContextAsync = await contextFactory.CreateDbContextAsync();
-        //await dbContextAsync.Database.MigrateAsync();
+        await dbContextAsync.Database.MigrateAsync();
 
         ApplicationConfiguration.Initialize();
         Application.Run(new Form1(host.Services));

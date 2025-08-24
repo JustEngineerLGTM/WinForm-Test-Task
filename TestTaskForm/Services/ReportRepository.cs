@@ -16,7 +16,7 @@ public class ReportRepository(IDbContextFactory<AppDbContext> contextFactory) : 
 
         await using var command = connection.CreateCommand();
         command.CommandType = System.Data.CommandType.StoredProcedure;
-        command.CommandText = "dbo.sp_GetEmployeeCount";
+        command.CommandText = "GetEmployeeCount";
 
         command.Parameters.Add(new SqlParameter("@StatusId", statusId));
         command.Parameters.Add(new SqlParameter("@FromDate", from));
