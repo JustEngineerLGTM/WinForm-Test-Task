@@ -1,0 +1,31 @@
+CREATE PROCEDURE dbo.GetAllPersons
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT
+        p.id,
+        p.first_name,
+        p.second_name,
+        p.last_name,
+        p.date_employ,
+        p.date_uneploy,
+        p.status,
+        p.id_dep,
+        p.id_post
+    FROM dbo.persons p
+END
+
+CREATE PROCEDURE dbo.GetEmployeeCount
+    @StatusId INT,
+    @FromDate DATETIME,
+    @ToDate DATETIME
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT COUNT(*) 
+    FROM dbo.persons
+    WHERE status = @StatusId
+      AND date_employ BETWEEN @FromDate AND @ToDate;
+END
