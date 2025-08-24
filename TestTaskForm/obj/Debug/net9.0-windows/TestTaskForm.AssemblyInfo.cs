@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TestTaskForm")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+077e9f2e28dbf23086fd6ffc2781fd4fae6d2ea0")]
 [assembly: System.Reflection.AssemblyProductAttribute("TestTaskForm")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TestTaskForm")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

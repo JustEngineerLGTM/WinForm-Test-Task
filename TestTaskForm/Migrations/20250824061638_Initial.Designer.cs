@@ -12,7 +12,7 @@ using TestTaskForm.Db;
 namespace TestTaskForm.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250823061628_Initial")]
+    [Migration("20250824061638_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
