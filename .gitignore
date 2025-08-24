@@ -1,4 +1,4 @@
 ﻿bin/
 obj/
 .idea/
-appsettings.json
+*.user

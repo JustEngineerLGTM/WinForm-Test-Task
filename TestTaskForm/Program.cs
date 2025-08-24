@@ -13,6 +13,8 @@ static class Program
         var configuration = new ConfigurationBuilder()
             .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .AddEnvironmentVariables()
+            .AddUserSecrets(typeof(Program).Assembly)
             .Build();
         var connectionString = configuration.GetConnectionString("Connection");
 
